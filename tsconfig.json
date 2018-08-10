@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "downlevelIteration": true,
     "lib": [
       "ES2015",
       "ES2015.Collection",
       "ES2015.Iterable"
     ],
     "module": "commonjs",
+    "outDir": "./dist",
     "target": "es3",
   },
   "files": [
