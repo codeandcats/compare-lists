@@ -14,8 +14,8 @@ describe('index', () => {
       })
 
       expect(report).toBeDefined()
-      expect(report).toHaveProperty('missingFromLeft', ['d'])
-      expect(report).toHaveProperty('missingFromRight', ['b'])
+      expect(report).toHaveProperty('missingInLeft', ['d'])
+      expect(report).toHaveProperty('missingInRight', ['b'])
       expect(report).toHaveProperty('matches', [
         ['a', 'a'],
         ['c', 'c']
@@ -27,16 +27,16 @@ describe('index', () => {
       const right = ['a', 'c', 'd']
 
       const onMatch = jest.fn()
-      const onMissingFromLeft = jest.fn()
-      const onMissingFromRight = jest.fn()
+      const onMissingInLeft = jest.fn()
+      const onMissingInRight = jest.fn()
 
       const result = compareLists({
         left,
         right,
         compare: (left, right) => left.localeCompare(right),
         onMatch,
-        onMissingFromLeft,
-        onMissingFromRight
+        onMissingInLeft,
+        onMissingInRight
       })
 
       expect(result).toBeUndefined()
@@ -45,11 +45,11 @@ describe('index', () => {
       expect(onMatch).toHaveBeenCalledWith('a', 'a')
       expect(onMatch).toHaveBeenCalledWith('c', 'c')
 
-      expect(onMissingFromLeft).toHaveBeenCalledTimes(1)
-      expect(onMissingFromLeft).toHaveBeenCalledWith('d')
+      expect(onMissingInLeft).toHaveBeenCalledTimes(1)
+      expect(onMissingInLeft).toHaveBeenCalledWith('d')
 
-      expect(onMissingFromRight).toHaveBeenCalledTimes(1)
-      expect(onMissingFromRight).toHaveBeenCalledWith('b')
+      expect(onMissingInRight).toHaveBeenCalledTimes(1)
+      expect(onMissingInRight).toHaveBeenCalledWith('b')
     })
 
     it('should compare strings', () => {
@@ -57,16 +57,16 @@ describe('index', () => {
       const right = 'acd'
 
       const onMatch = jest.fn()
-      const onMissingFromLeft = jest.fn()
-      const onMissingFromRight = jest.fn()
+      const onMissingInLeft = jest.fn()
+      const onMissingInRight = jest.fn()
 
       const result = compareLists({
         left,
         right,
         compare: (left, right) => left.localeCompare(right),
         onMatch,
-        onMissingFromLeft,
-        onMissingFromRight
+        onMissingInLeft,
+        onMissingInRight
       })
 
       expect(result).toBeUndefined()
@@ -75,11 +75,11 @@ describe('index', () => {
       expect(onMatch).toHaveBeenCalledWith('a', 'a')
       expect(onMatch).toHaveBeenCalledWith('c', 'c')
 
-      expect(onMissingFromLeft).toHaveBeenCalledTimes(1)
-      expect(onMissingFromLeft).toHaveBeenCalledWith('d')
+      expect(onMissingInLeft).toHaveBeenCalledTimes(1)
+      expect(onMissingInLeft).toHaveBeenCalledWith('d')
 
-      expect(onMissingFromRight).toHaveBeenCalledTimes(1)
-      expect(onMissingFromRight).toHaveBeenCalledWith('b')
+      expect(onMissingInRight).toHaveBeenCalledTimes(1)
+      expect(onMissingInRight).toHaveBeenCalledWith('b')
     })
 
     it('should compare arrays of different types', () => {
@@ -87,8 +87,8 @@ describe('index', () => {
       const right = [1, 2, 3]
 
       const onMatch = jest.fn()
-      const onMissingFromLeft = jest.fn()
-      const onMissingFromRight = jest.fn()
+      const onMissingInLeft = jest.fn()
+      const onMissingInRight = jest.fn()
 
       const report = compareLists({
         left,
@@ -96,23 +96,23 @@ describe('index', () => {
         compare: (left, right) => left.localeCompare(right.toString()),
         returnReport: true,
         onMatch,
-        onMissingFromLeft,
-        onMissingFromRight
+        onMissingInLeft,
+        onMissingInRight
       })
 
       expect(onMatch).toHaveBeenCalledTimes(2)
       expect(onMatch).toHaveBeenCalledWith('1', 1)
       expect(onMatch).toHaveBeenCalledWith('3', 3)
 
-      expect(onMissingFromLeft).toHaveBeenCalledTimes(1)
-      expect(onMissingFromLeft).toHaveBeenCalledWith(2)
+      expect(onMissingInLeft).toHaveBeenCalledTimes(1)
+      expect(onMissingInLeft).toHaveBeenCalledWith(2)
 
-      expect(onMissingFromRight).toHaveBeenCalledTimes(1)
-      expect(onMissingFromRight).toHaveBeenCalledWith('4')
+      expect(onMissingInRight).toHaveBeenCalledTimes(1)
+      expect(onMissingInRight).toHaveBeenCalledWith('4')
 
       expect(report).toBeDefined()
-      expect(report).toHaveProperty('missingFromLeft', [2])
-      expect(report).toHaveProperty('missingFromRight', ['4'])
+      expect(report).toHaveProperty('missingInLeft', [2])
+      expect(report).toHaveProperty('missingInRight', ['4'])
       expect(report).toHaveProperty('matches', [
         ['1', 1],
         ['3', 3]
