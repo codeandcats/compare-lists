@@ -1,6 +1,10 @@
 ## compare-lists
 Super efficiently compares two sorted lists (arrays, strings, anything that is iterable actually).
 
+<center>
+	<img src="https://raw.githubusercontent.com/codeandcats/compare-lists/master/img/visualisation.png" />
+</center>
+
 ### Install
 ```sh
 npm install compare-lists --save
