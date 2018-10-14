@@ -14,6 +14,7 @@
     "prepackage": "npm run build",
     "package": "ts-node ./support/package.ts",
     "release": "git checkout master && git pull origin master && standard-version",
+    "preship-it": "npm run package",
     "ship-it": "git push --follow-tags origin master && cd ./dist && npm publish"
   },
   "keywords": [
