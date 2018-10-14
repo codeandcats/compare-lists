@@ -1,14 +1,22 @@
 ## compare-lists
+
 Super efficiently compares two sorted lists (arrays, strings, anything that is iterable actually).
+
 
 <center>
 	<img src="https://raw.githubusercontent.com/codeandcats/compare-lists/master/img/visualisation.png" />
 </center>
 
+[![npm version](https://badge.fury.io/js/compare-lists.svg)](https://badge.fury.io/js/compare-lists)
+[![Build Status](https://travis-ci.org/codeandcats/compare-lists.svg?branch=master)](https://travis-ci.org/codeandcats/compare-lists)
+[![Coverage Status](https://coveralls.io/repos/github/codeandcats/compare-lists/badge.svg?branch=master)](https://coveralls.io/github/codeandcats/compare-lists?branch=master)
+
+
 ### Install
 ```sh
 npm install compare-lists --save
 ```
+
 
 ### Usage
 ```typescript
