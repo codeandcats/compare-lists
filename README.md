@@ -218,3 +218,9 @@ Will output:
   ]
 }
 ```
+
+
+## Contributing
+Got an issue or a feature request? [Log it](https://github.com/codeandcats/compare-lists/issues).
+
+[Pull-requests](https://github.com/codeandcats/compare-lists/pulls) are also welcome. 😸
