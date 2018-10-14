@@ -1,27 +1,27 @@
 export interface BaseCompareOptions<TLeft, TRight> {
-  compare: (left: TLeft, right: TRight) => number
-  onMissingInLeft?: (right: TRight) => void
-  onMissingInRight?: (left: TLeft) => void
-  onMatch?: (left: TLeft, right: TRight) => void
+  compare: (left: TLeft, right: TRight) => number;
+  onMissingInLeft?: (right: TRight) => void;
+  onMissingInRight?: (left: TLeft) => void;
+  onMatch?: (left: TLeft, right: TRight) => void;
 }
 
 export interface CompareListsOptions<TLeft, TRight> extends BaseCompareOptions<TLeft, TRight> {
-  left: Iterable<TLeft>
-  right: Iterable<TRight>
+  left: Iterable<TLeft>;
+  right: Iterable<TRight>;
 }
 
 export interface CompareListsReport<TLeft, TRight> {
-  missingInLeft: TRight[]
-  missingInRight: TLeft[]
-  matches: [TLeft, TRight][]
+  missingInLeft: TRight[];
+  missingInRight: TLeft[];
+  matches: Array<[TLeft, TRight]>;
 }
 
 export function compareLists<TLeft, TRight>(
   options: CompareListsOptions<TLeft, TRight>
-): void
+): void;
 export function compareLists<TLeft, TRight>(
   options: CompareListsOptions<TLeft, TRight> & { returnReport: true }
-): CompareListsReport<TLeft, TRight>
+): CompareListsReport<TLeft, TRight>;
 
 /**
  * Efficiently compares two lists (arrays, strings, Maps, etc - anything that implements the iterable protocol).
@@ -30,8 +30,8 @@ export function compareLists<TLeft, TRight>(
 export function compareLists<TLeft, TRight>(
   options: CompareListsOptions<TLeft, TRight> & { returnReport?: boolean }
 ): void | CompareListsReport<TLeft, TRight> {
-  const leftIterator = options.left[Symbol.iterator]()
-  const rightIterator = options.right[Symbol.iterator]()
+  const leftIterator = options.left[Symbol.iterator]();
+  const rightIterator = options.right[Symbol.iterator]();
 
   const { compare, returnReport, onMissingInLeft, onMissingInRight, onMatch } = options;
 
@@ -43,22 +43,22 @@ export function compareLists<TLeft, TRight>(
     onMatch,
     onMissingInLeft,
     onMissingInRight
-  })
+  });
 
-  return result
+  return result;
 }
 
 export interface CompareIteratorsOptions<TLeft, TRight> extends BaseCompareOptions<TLeft, TRight> {
-  left: Iterator<TLeft>
-  right: Iterator<TRight>
+  left: Iterator<TLeft>;
+  right: Iterator<TRight>;
 }
 
 export function compareIterators<TLeft, TRight>(
   options: CompareIteratorsOptions<TLeft, TRight>
-): void
+): void;
 export function compareIterators<TLeft, TRight>(
   options: CompareIteratorsOptions<TLeft, TRight> & { returnReport: true }
-): CompareListsReport<TLeft, TRight>
+): CompareListsReport<TLeft, TRight>;
 
 /**
  * Efficiently compares two lists (arrays, strings, Maps, etc - anything that implements the iterable protocol).
@@ -67,74 +67,74 @@ export function compareIterators<TLeft, TRight>(
 export function compareIterators<TLeft, TRight>(
   options: CompareIteratorsOptions<TLeft, TRight> & { returnReport?: boolean }
 ): void | CompareListsReport<TLeft, TRight> {
-  const leftIterator = options.left
-  const rightIterator = options.right
+  const leftIterator = options.left;
+  const rightIterator = options.right;
   const { compare, onMissingInLeft, onMissingInRight, onMatch, returnReport } = options;
 
   const result = (
     returnReport ?
-    {
-      missingInLeft: [],
-      missingInRight: [],
-      matches: []
-    } as CompareListsReport<TLeft, TRight> :
-    undefined
-  )
+      {
+        missingInLeft: [],
+        missingInRight: [],
+        matches: []
+      } as CompareListsReport<TLeft, TRight> :
+      undefined
+  );
 
-  let left: { done: boolean, value: TLeft }
-  let right: { done: boolean, value: TRight }
+  let left: { done: boolean, value: TLeft };
+  let right: { done: boolean, value: TRight };
 
-  const nextLeft = () => left = leftIterator.next()
-  const nextRight = () => right = rightIterator.next()
+  const nextLeft = () => left = leftIterator.next();
+  const nextRight = () => right = rightIterator.next();
 
   const handleMissingInLeft = () => {
     if (returnReport) {
-      result.missingInLeft.push(right.value)
+      result.missingInLeft.push(right.value);
     }
     if (onMissingInLeft) {
-      onMissingInLeft(right.value)
+      onMissingInLeft(right.value);
     }
-    nextRight()
-  }
+    nextRight();
+  };
 
   const handleMissingInRight = () => {
     if (returnReport) {
-      result.missingInRight.push(left.value)
+      result.missingInRight.push(left.value);
     }
     if (onMissingInRight) {
-      onMissingInRight(left.value)
+      onMissingInRight(left.value);
     }
-    nextLeft()
-  }
+    nextLeft();
+  };
 
   const handleMatch = () => {
     if (returnReport) {
-      result.matches.push([left.value, right.value])
+      result.matches.push([left.value, right.value]);
     }
     if (onMatch) {
-      onMatch(left.value, right.value)
+      onMatch(left.value, right.value);
     }
-    nextLeft()
-    nextRight()
-  }
+    nextLeft();
+    nextRight();
+  };
 
-  nextLeft()
-  nextRight()
+  nextLeft();
+  nextRight();
 
   while (!left.done || !right.done) {
-    const result =
+    const compareResult =
       left.done ? 1 :
-      right.done ? -1 :
-      compare(left.value, right.value);
+        right.done ? -1 :
+          compare(left.value, right.value);
 
-    if (result < 0) {
-      handleMissingInRight()
-    } else if (result > 0) {
-      handleMissingInLeft()
+    if (compareResult < 0) {
+      handleMissingInRight();
+    } else if (compareResult > 0) {
+      handleMissingInLeft();
     } else {
-      handleMatch()
+      handleMatch();
     }
   }
 
-  return result
+  return result;
 }
