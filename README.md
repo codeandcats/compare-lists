@@ -9,7 +9,7 @@ Super efficiently compares two sorted lists (arrays, strings, anything that is i
 
 [![npm version](https://badge.fury.io/js/compare-lists.svg)](https://badge.fury.io/js/compare-lists)
 [![Build Status](https://travis-ci.org/codeandcats/compare-lists.svg?branch=master)](https://travis-ci.org/codeandcats/compare-lists)
-[![Coverage Status](https://coveralls.io/repos/github/codeandcats/compare-lists/badge.svg?branch=master)](https://coveralls.io/github/codeandcats/compare-lists?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/codeandcats/compare-lists/badge.svg?branch=master)](https://coveralls.io/github/codeandcats/compare-lists?branch=master) [![Greenkeeper badge](https://badges.greenkeeper.io/codeandcats/compare-lists.svg)](https://greenkeeper.io/)
 
 
 ### Install
