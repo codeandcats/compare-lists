@@ -1,6 +1,6 @@
 {
   "name": "compare-lists",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Super efficiently compares two sorted lists (arrays, strings, anything that is iterable actually).",
   "main": "index.js",
   "scripts": {
