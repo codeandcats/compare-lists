@@ -48,7 +48,7 @@
     "replace": "^1.1.0",
     "standard-version": "^6.0.1",
     "ts-jest": "^24.0.2",
-    "ts-node": "^8.0.3",
+    "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
     "typescript": "^3.5.2"
   },
