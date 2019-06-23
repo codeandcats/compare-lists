@@ -3,9 +3,9 @@
     "declaration": true,
     "downlevelIteration": true,
     "lib": [
-      "ES2015",
-      "ES2015.Collection",
-      "ES2015.Iterable"
+      "es2015",
+      "es2015.collection",
+      "es2015.iterable"
     ],
     "module": "commonjs",
     "outDir": "./dist",
