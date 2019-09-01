@@ -81,8 +81,8 @@ export function compareIterators<TLeft, TRight>(
       undefined
   );
 
-  let left: { done: boolean, value: TLeft };
-  let right: { done: boolean, value: TRight };
+  let left: IteratorResult<TLeft>;
+  let right: IteratorResult<TRight>;
 
   const nextLeft = () => left = leftIterator.next();
   const nextRight = () => right = rightIterator.next();
