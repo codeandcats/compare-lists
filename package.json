@@ -40,7 +40,7 @@
     "@commitlint/cli": "^8.2.0",
     "@commitlint/prompt-cli": "^8.2.0",
     "@types/jest": "^24.0.25",
-    "@types/node": "^12.12.21",
+    "@types/node": "^13.1.2",
     "coveralls": "^3.0.9",
     "get-root-path": "^2.0.2",
     "husky": "^3.1.0",
