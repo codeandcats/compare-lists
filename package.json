@@ -39,7 +39,7 @@
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/prompt-cli": "^8.3.5",
-    "@types/jest": "^24.9.0",
+    "@types/jest": "^24.9.1",
     "@types/node": "^12.12.21",
     "coveralls": "^3.0.9",
     "get-root-path": "^2.0.2",
