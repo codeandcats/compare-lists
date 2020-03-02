@@ -9,7 +9,6 @@
     "postbuild": "npm run package",
     "clean": "rimraf ./dist",
     "check": "npm run lint && npm run build && npm test",
-    "commit": "commit",
     "lint": "tslint -p ./tsconfig.json",
     "test": "jest --coverage",
     "package": "ts-node ./support/package.ts",
@@ -38,7 +37,6 @@
   },
   "devDependencies": {
     "@commitlint/cli": "8.3.5",
-    "@commitlint/prompt-cli": "8.3.5",
     "@types/jest": "25.1.3",
     "@types/node": "13.7.7",
     "coveralls": "3.0.9",
