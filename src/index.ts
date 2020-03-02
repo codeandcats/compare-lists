@@ -5,7 +5,8 @@ export interface BaseCompareOptions<TLeft, TRight> {
   onMatch?: (left: TLeft, right: TRight) => void;
 }
 
-export interface CompareListsOptions<TLeft, TRight> extends BaseCompareOptions<TLeft, TRight> {
+export interface CompareListsOptions<TLeft, TRight>
+  extends BaseCompareOptions<TLeft, TRight> {
   left: Iterable<TLeft>;
   right: Iterable<TRight>;
 }
@@ -13,7 +14,7 @@ export interface CompareListsOptions<TLeft, TRight> extends BaseCompareOptions<T
 export interface CompareListsReport<TLeft, TRight> {
   missingInLeft: TRight[];
   missingInRight: TLeft[];
-  matches: Array<[TLeft, TRight]>;
+  matches: [TLeft, TRight][];
 }
 
 export function compareLists<TLeft, TRight>(
@@ -33,7 +34,13 @@ export function compareLists<TLeft, TRight>(
   const leftIterator = options.left[Symbol.iterator]();
   const rightIterator = options.right[Symbol.iterator]();
 
-  const { compare, returnReport, onMissingInLeft, onMissingInRight, onMatch } = options;
+  const {
+    compare,
+    returnReport,
+    onMissingInLeft,
+    onMissingInRight,
+    onMatch
+  } = options;
 
   const result = compareIterators({
     left: leftIterator,
@@ -48,7 +55,8 @@ export function compareLists<TLeft, TRight>(
   return result;
 }
 
-export interface CompareIteratorsOptions<TLeft, TRight> extends BaseCompareOptions<TLeft, TRight> {
+export interface CompareIteratorsOptions<TLeft, TRight>
+  extends BaseCompareOptions<TLeft, TRight> {
   left: Iterator<TLeft>;
   right: Iterator<TRight>;
 }
@@ -69,23 +77,27 @@ export function compareIterators<TLeft, TRight>(
 ): void | CompareListsReport<TLeft, TRight> {
   const leftIterator = options.left;
   const rightIterator = options.right;
-  const { compare, onMissingInLeft, onMissingInRight, onMatch, returnReport } = options;
+  const {
+    compare,
+    onMissingInLeft,
+    onMissingInRight,
+    onMatch,
+    returnReport
+  } = options;
 
-  const result = (
-    returnReport ?
-      {
+  const result = returnReport
+    ? ({
         missingInLeft: [],
         missingInRight: [],
         matches: []
-      } as CompareListsReport<TLeft, TRight> :
-      undefined
-  );
+      } as CompareListsReport<TLeft, TRight>)
+    : undefined;
 
   let left: IteratorResult<TLeft>;
   let right: IteratorResult<TRight>;
 
-  const nextLeft = () => left = leftIterator.next();
-  const nextRight = () => right = rightIterator.next();
+  const nextLeft = () => (left = leftIterator.next());
+  const nextRight = () => (right = rightIterator.next());
 
   const handleMissingInLeft = () => {
     if (returnReport) {
@@ -122,10 +134,11 @@ export function compareIterators<TLeft, TRight>(
   nextRight();
 
   while (!left.done || !right.done) {
-    const compareResult =
-      left.done ? 1 :
-        right.done ? -1 :
-          compare(left.value, right.value);
+    const compareResult = left.done
+      ? 1
+      : right.done
+      ? -1
+      : compare(left.value, right.value);
 
     if (compareResult < 0) {
       handleMissingInRight();
