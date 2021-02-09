@@ -41,7 +41,7 @@
     "@types/node": "13.9.3",
     "coveralls": "3.0.11",
     "get-root-path": "2.0.2",
-    "husky": "4.2.3",
+    "husky": "5.0.9",
     "jest": "25.2.3",
     "replace": "1.1.5",
     "standard-version": "7.1.0",
